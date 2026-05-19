@@ -13,13 +13,20 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         self.ui.connectButton.clicked.connect(self.open_connection_dialog)
-        self.ui.refreshButton.clicked.connect(db_service.fetch_all)
 
-        self.ui.insertRowButton.clicked.connect(crud_service.insert_row)
-        self.ui.updateRowButton.clicked.connect(crud_service.update_row)
-        self.ui.deleteRowButton.clicked.connect(crud_service.delete_row)
-
+        self.connection_required_widgets = [
+            self.ui.refreshButton.clicked.connect(db_service.fetch_all),
+            self.ui.insertRowButton.clicked.connect(crud_service.insert_row),
+            self.ui.updateRowButton.clicked.connect(crud_service.update_row),
+            self.ui.deleteRowButton.clicked.connect(crud_service.delete_row)
+        ]
 
     def open_connection_dialog(self):
         dialog = ConnectionDialog(self.db_service, self)
         dialog.exec()
+
+    def update_ui_state(self):
+        connected = self.db_service.connection is not None
+
+        for widget in self.connection_required_widgets:
+            widget.setEnabled(connected)

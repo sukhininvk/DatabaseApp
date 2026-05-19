@@ -53,6 +53,7 @@ class Ui_MainWindow(object):
 
         self.refreshButton = QPushButton(self.verticalLayoutWidget)
         self.refreshButton.setObjectName(u"refreshButton")
+        self.refreshButton.setEnabled(False)
 
         self.upperLeftLayout.addWidget(self.refreshButton)
 
@@ -65,6 +66,7 @@ class Ui_MainWindow(object):
 
         self.treeView = QTreeView(self.verticalLayoutWidget)
         self.treeView.setObjectName(u"treeView")
+        self.treeView.setEnabled(False)
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
@@ -83,16 +85,19 @@ class Ui_MainWindow(object):
         self.upperRightLayout.setObjectName(u"upperRightLayout")
         self.insertRowButton = QPushButton(self.verticalLayoutWidget_2)
         self.insertRowButton.setObjectName(u"insertRowButton")
+        self.insertRowButton.setEnabled(False)
 
         self.upperRightLayout.addWidget(self.insertRowButton)
 
         self.updateRowButton = QPushButton(self.verticalLayoutWidget_2)
         self.updateRowButton.setObjectName(u"updateRowButton")
+        self.updateRowButton.setEnabled(False)
 
         self.upperRightLayout.addWidget(self.updateRowButton)
 
         self.deleteRowButton = QPushButton(self.verticalLayoutWidget_2)
         self.deleteRowButton.setObjectName(u"deleteRowButton")
+        self.deleteRowButton.setEnabled(False)
 
         self.upperRightLayout.addWidget(self.deleteRowButton)
 
@@ -105,6 +110,7 @@ class Ui_MainWindow(object):
 
         self.tableView = QTableView(self.verticalLayoutWidget_2)
         self.tableView.setObjectName(u"tableView")
+        self.tableView.setEnabled(False)
 
         self.rightLayout.addWidget(self.tableView)
 
