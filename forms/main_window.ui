@@ -13,37 +13,65 @@
   <property name="windowTitle">
    <string>DatabaseApp</string>
   </property>
-  <widget class="QWidget" name="CentralWidget">
+  <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <widget class="QSplitter" name="Splitter">
+     <widget class="QSplitter" name="splitter">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="orientation">
        <enum>Qt::Orientation::Horizontal</enum>
       </property>
+      <property name="opaqueResize">
+       <bool>true</bool>
+      </property>
+      <property name="handleWidth">
+       <number>5</number>
+      </property>
+      <property name="childrenCollapsible">
+       <bool>false</bool>
+      </property>
       <widget class="QWidget" name="verticalLayoutWidget">
-       <layout class="QVBoxLayout" name="LeftLayout">
+       <layout class="QVBoxLayout" name="leftLayout">
         <item>
-         <layout class="QHBoxLayout" name="UpperLeftLayout">
+         <layout class="QHBoxLayout" name="upperLeftLayout">
           <item>
-           <widget class="QPushButton" name="ConnectButton">
+           <widget class="QPushButton" name="connectButton">
             <property name="text">
              <string>Connect</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="RefreshButton">
+           <widget class="QPushButton" name="refreshButton">
             <property name="text">
              <string>Refresh</string>
             </property>
            </widget>
           </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
          </layout>
         </item>
         <item>
-         <widget class="QTreeView" name="TreeView">
+         <widget class="QTreeView" name="treeView">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -53,41 +81,47 @@
        </layout>
       </widget>
       <widget class="QWidget" name="verticalLayoutWidget_2">
-       <layout class="QVBoxLayout" name="RightLayout">
+       <layout class="QVBoxLayout" name="rightLayout">
         <item>
-         <layout class="QHBoxLayout" name="UpperRightLayout">
+         <layout class="QHBoxLayout" name="upperRightLayout">
           <item>
-           <widget class="QPushButton" name="InsertButton">
+           <widget class="QPushButton" name="insertRowButton">
             <property name="text">
              <string>Insert Row</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="UpdateButton">
+           <widget class="QPushButton" name="updateRowButton">
             <property name="text">
              <string>Update Row</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="DeleteButton">
+           <widget class="QPushButton" name="deleteRowButton">
             <property name="text">
              <string>Delete Row</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="SQLQueryButton">
-            <property name="text">
-             <string>SQL Query</string>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
-           </widget>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QTableView" name="TableView"/>
+         <widget class="QTableView" name="tableView"/>
         </item>
        </layout>
       </widget>
