@@ -9,7 +9,7 @@ from dbapp.services.crud import CrudService
 
 from dbapp.resources import resources  # noqa: F401
 
-if __name__ == "__main__":
+def main():
     app = QApplication(sys.argv)
 
     app.setWindowIcon(QIcon(":/icons/icon.png"))
@@ -21,3 +21,7 @@ if __name__ == "__main__":
     window.show()
 
     sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    main()

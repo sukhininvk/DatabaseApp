@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QDialog
+
 from dbapp.ui.generated.connecrion_dialog import Ui_ConnectionDialog
 
 class ConnectionDialog(QDialog):

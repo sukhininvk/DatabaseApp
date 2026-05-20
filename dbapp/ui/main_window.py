@@ -12,13 +12,14 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.ui.connectButton.clicked.connect(self.open_connection_dialog)
+        self.ui.actionConnect.triggered.connect(self.open_connection_dialog)
 
         self.connection_required_widgets = [
-            self.ui.refreshButton.clicked.connect(db_service.fetch_all),
-            self.ui.insertRowButton.clicked.connect(crud_service.insert_row),
-            self.ui.updateRowButton.clicked.connect(crud_service.update_row),
-            self.ui.deleteRowButton.clicked.connect(crud_service.delete_row)
+            self.ui.actionFetch.triggered.connect(db_service.fetch_all),
+            self.ui.actionDisconnect.triggered.connect(db_service.disconnect),
+
+            self.ui.treeView,
+            self.ui.tableWidget
         ]
 
     def open_connection_dialog(self):

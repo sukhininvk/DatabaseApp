@@ -11,19 +11,32 @@
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QMainWindow,
-    QPushButton, QSizePolicy, QSpacerItem, QSplitter,
-    QTableView, QTreeView, QVBoxLayout, QWidget)
+    QMenu, QMenuBar, QSizePolicy, QSplitter,
+    QTableWidget, QTableWidgetItem, QTreeView, QVBoxLayout,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(800, 600)
+        self.actionConnect = QAction(MainWindow)
+        self.actionConnect.setObjectName(u"actionConnect")
+        self.actionFetch = QAction(MainWindow)
+        self.actionFetch.setObjectName(u"actionFetch")
+        self.actionFetch.setEnabled(False)
+        self.actionDisconnect = QAction(MainWindow)
+        self.actionDisconnect.setObjectName(u"actionDisconnect")
+        self.actionDisconnect.setEnabled(False)
+        self.actionDeleteRow = QAction(MainWindow)
+        self.actionDeleteRow.setObjectName(u"actionDeleteRow")
+        self.actionDeleteRow.setEnabled(False)
         self.centralWidget = QWidget(MainWindow)
         self.centralWidget.setObjectName(u"centralWidget")
         self.horizontalLayout_2 = QHBoxLayout(self.centralWidget)
@@ -44,26 +57,6 @@ class Ui_MainWindow(object):
         self.leftLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.leftLayout.setObjectName(u"leftLayout")
         self.leftLayout.setContentsMargins(0, 0, 0, 0)
-        self.upperLeftLayout = QHBoxLayout()
-        self.upperLeftLayout.setObjectName(u"upperLeftLayout")
-        self.connectButton = QPushButton(self.verticalLayoutWidget)
-        self.connectButton.setObjectName(u"connectButton")
-
-        self.upperLeftLayout.addWidget(self.connectButton)
-
-        self.refreshButton = QPushButton(self.verticalLayoutWidget)
-        self.refreshButton.setObjectName(u"refreshButton")
-        self.refreshButton.setEnabled(False)
-
-        self.upperLeftLayout.addWidget(self.refreshButton)
-
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.upperLeftLayout.addItem(self.horizontalSpacer)
-
-
-        self.leftLayout.addLayout(self.upperLeftLayout)
-
         self.treeView = QTreeView(self.verticalLayoutWidget)
         self.treeView.setObjectName(u"treeView")
         self.treeView.setEnabled(False)
@@ -81,44 +74,30 @@ class Ui_MainWindow(object):
         self.rightLayout = QVBoxLayout(self.verticalLayoutWidget_2)
         self.rightLayout.setObjectName(u"rightLayout")
         self.rightLayout.setContentsMargins(0, 0, 0, 0)
-        self.upperRightLayout = QHBoxLayout()
-        self.upperRightLayout.setObjectName(u"upperRightLayout")
-        self.insertRowButton = QPushButton(self.verticalLayoutWidget_2)
-        self.insertRowButton.setObjectName(u"insertRowButton")
-        self.insertRowButton.setEnabled(False)
+        self.tableWidget = QTableWidget(self.verticalLayoutWidget_2)
+        self.tableWidget.setObjectName(u"tableWidget")
+        self.tableWidget.setEnabled(False)
+        sizePolicy1.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
+        self.tableWidget.setSizePolicy(sizePolicy1)
 
-        self.upperRightLayout.addWidget(self.insertRowButton)
-
-        self.updateRowButton = QPushButton(self.verticalLayoutWidget_2)
-        self.updateRowButton.setObjectName(u"updateRowButton")
-        self.updateRowButton.setEnabled(False)
-
-        self.upperRightLayout.addWidget(self.updateRowButton)
-
-        self.deleteRowButton = QPushButton(self.verticalLayoutWidget_2)
-        self.deleteRowButton.setObjectName(u"deleteRowButton")
-        self.deleteRowButton.setEnabled(False)
-
-        self.upperRightLayout.addWidget(self.deleteRowButton)
-
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.upperRightLayout.addItem(self.horizontalSpacer_2)
-
-
-        self.rightLayout.addLayout(self.upperRightLayout)
-
-        self.tableView = QTableView(self.verticalLayoutWidget_2)
-        self.tableView.setObjectName(u"tableView")
-        self.tableView.setEnabled(False)
-
-        self.rightLayout.addWidget(self.tableView)
+        self.rightLayout.addWidget(self.tableWidget)
 
         self.splitter.addWidget(self.verticalLayoutWidget_2)
 
         self.horizontalLayout_2.addWidget(self.splitter)
 
         MainWindow.setCentralWidget(self.centralWidget)
+        self.menuBar = QMenuBar(MainWindow)
+        self.menuBar.setObjectName(u"menuBar")
+        self.menuBar.setGeometry(QRect(0, 0, 800, 33))
+        self.menuDatabase = QMenu(self.menuBar)
+        self.menuDatabase.setObjectName(u"menuDatabase")
+        MainWindow.setMenuBar(self.menuBar)
+
+        self.menuBar.addAction(self.menuDatabase.menuAction())
+        self.menuDatabase.addAction(self.actionConnect)
+        self.menuDatabase.addAction(self.actionFetch)
+        self.menuDatabase.addAction(self.actionDisconnect)
 
         self.retranslateUi(MainWindow)
 
@@ -127,10 +106,10 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"DatabaseApp", None))
-        self.connectButton.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
-        self.refreshButton.setText(QCoreApplication.translate("MainWindow", u"Refresh", None))
-        self.insertRowButton.setText(QCoreApplication.translate("MainWindow", u"Insert Row", None))
-        self.updateRowButton.setText(QCoreApplication.translate("MainWindow", u"Update Row", None))
-        self.deleteRowButton.setText(QCoreApplication.translate("MainWindow", u"Delete Row", None))
+        self.actionConnect.setText(QCoreApplication.translate("MainWindow", u"Connect to Server", None))
+        self.actionFetch.setText(QCoreApplication.translate("MainWindow", u"Fetch Databases", None))
+        self.actionDisconnect.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))
+        self.actionDeleteRow.setText(QCoreApplication.translate("MainWindow", u"Delete Row", None))
+        self.menuDatabase.setTitle(QCoreApplication.translate("MainWindow", u"Connection", None))
     # retranslateUi
 
