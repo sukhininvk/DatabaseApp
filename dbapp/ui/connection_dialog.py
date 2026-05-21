@@ -1,8 +1,11 @@
-from PySide6.QtWidgets import QDialog
+from PySide6.QtWidgets import QDialog, QMessageBox
+from PySide6.QtCore import Signal
 
-from dbapp.ui.generated.connecrion_dialog import Ui_ConnectionDialog
+from dbapp.ui.generated.connection_dialog import Ui_ConnectionDialog
 
 class ConnectionDialog(QDialog):
+    connected = Signal()
+
     def __init__(self, db_service, parent=None):
         super().__init__(parent)
 
@@ -11,14 +14,19 @@ class ConnectionDialog(QDialog):
 
         self.db_service = db_service
 
-        self.ui.CancelButton.clicked.connect(self.reject)
-        self.ui.ConnectButton.clicked.connect(self.connect_db)
+        self.ui.cancelButton.clicked.connect(self.reject)
+        self.ui.connectButton.clicked.connect(self.connect_to_server)
 
-    def connect_db(self):
-        self.db_service.connect(
-            self.ui.HostnameLineEdit.text(),
-            self.ui.UsernameLineEdit.text(),
-            self.ui.PasswordLineEdit.text()
-        )
-
-        self.close()
+    def connect_to_server(self):
+        try:
+            self.db_service.connect(
+                self.ui.hostnameLineEdit.text(),
+                self.ui.usernameLineEdit.text(),
+                self.ui.passwordLineEdit.text(),
+                self.ui.databaseLineEdit.text()
+            )
+        except Exception as err:
+            QMessageBox.critical(self, "Error", str(err))
+        finally:
+            self.connected.emit()
+            self.close()

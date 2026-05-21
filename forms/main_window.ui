@@ -38,7 +38,7 @@
       <widget class="QWidget" name="verticalLayoutWidget">
        <layout class="QVBoxLayout" name="leftLayout">
         <item>
-         <widget class="QTreeView" name="treeView">
+         <widget class="QListWidget" name="listWidget">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -83,11 +83,18 @@
     </rect>
    </property>
    <widget class="QMenu" name="menuDatabase">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>154</y>
+      <width>117</width>
+      <height>102</height>
+     </rect>
+    </property>
     <property name="title">
      <string>Connection</string>
     </property>
     <addaction name="actionConnect"/>
-    <addaction name="actionFetch"/>
     <addaction name="actionDisconnect"/>
    </widget>
    <addaction name="menuDatabase"/>
@@ -95,6 +102,9 @@
   <action name="actionConnect">
    <property name="text">
     <string>Connect to Server</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
   <action name="actionFetch">
@@ -104,6 +114,9 @@
    <property name="text">
     <string>Fetch Databases</string>
    </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
   </action>
   <action name="actionDisconnect">
    <property name="enabled">
@@ -111,6 +124,9 @@
    </property>
    <property name="text">
     <string>Disconnect</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+D</string>
    </property>
   </action>
   <action name="actionDeleteRow">

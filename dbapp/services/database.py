@@ -3,31 +3,38 @@ import mysql.connector
 class DBService:
     def __init__(self):
         self.connection = None
-        self.cursor = None
 
-    def connect(self, host: str, user: str, password: str):
+    def connect(self, host: str, user: str, password: str, database: str):
+        if self.is_connected():
+            self.disconnect()
+
         self.connection = mysql.connector.connect(
             host=host,
             user=user,
-            password=password
+            password=password,
+            database=database
         )
-        self.cursor = self.connection.cursor()
 
     def disconnect(self):
-        if self.connection:
+        if self.is_connected():
             self.connection.close()
 
         self.connection = None
-        self.cursor = None
 
-    def get_databases(self):
-        raise NotImplementedError
+    def is_connected(self):
+        return self.connection and self.connection.is_connected()
 
-    def get_tables(self):
-        raise NotImplementedError
+    def get_tables(self) -> list[str]:
+        cursor = self.sql_execute("SHOW TABLES")
 
-    def fetch_all(self):
-        raise NotImplementedError
+        tables = [table[0] for table in cursor.fetchall()]
 
-    def sql_execute(self, query):
-        raise NotImplementedError
+        cursor.close()
+
+        return tables
+
+    def sql_execute(self, query: str, params=None):
+        cursor = self.connection.cursor()
+        cursor.execute(query, params)
+
+        return cursor

@@ -16,10 +16,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QMainWindow,
-    QMenu, QMenuBar, QSizePolicy, QSplitter,
-    QTableWidget, QTableWidgetItem, QTreeView, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QListWidget,
+    QListWidgetItem, QMainWindow, QMenu, QMenuBar,
+    QSizePolicy, QSplitter, QTableWidget, QTableWidgetItem,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -57,16 +57,16 @@ class Ui_MainWindow(object):
         self.leftLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.leftLayout.setObjectName(u"leftLayout")
         self.leftLayout.setContentsMargins(0, 0, 0, 0)
-        self.treeView = QTreeView(self.verticalLayoutWidget)
-        self.treeView.setObjectName(u"treeView")
-        self.treeView.setEnabled(False)
+        self.listWidget = QListWidget(self.verticalLayoutWidget)
+        self.listWidget.setObjectName(u"listWidget")
+        self.listWidget.setEnabled(False)
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.treeView.sizePolicy().hasHeightForWidth())
-        self.treeView.setSizePolicy(sizePolicy1)
+        sizePolicy1.setHeightForWidth(self.listWidget.sizePolicy().hasHeightForWidth())
+        self.listWidget.setSizePolicy(sizePolicy1)
 
-        self.leftLayout.addWidget(self.treeView)
+        self.leftLayout.addWidget(self.listWidget)
 
         self.splitter.addWidget(self.verticalLayoutWidget)
         self.verticalLayoutWidget_2 = QWidget(self.splitter)
@@ -92,11 +92,11 @@ class Ui_MainWindow(object):
         self.menuBar.setGeometry(QRect(0, 0, 800, 33))
         self.menuDatabase = QMenu(self.menuBar)
         self.menuDatabase.setObjectName(u"menuDatabase")
+        self.menuDatabase.setGeometry(QRect(270, 154, 117, 102))
         MainWindow.setMenuBar(self.menuBar)
 
         self.menuBar.addAction(self.menuDatabase.menuAction())
         self.menuDatabase.addAction(self.actionConnect)
-        self.menuDatabase.addAction(self.actionFetch)
         self.menuDatabase.addAction(self.actionDisconnect)
 
         self.retranslateUi(MainWindow)
@@ -107,8 +107,17 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"DatabaseApp", None))
         self.actionConnect.setText(QCoreApplication.translate("MainWindow", u"Connect to Server", None))
+#if QT_CONFIG(shortcut)
+        self.actionConnect.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+N", None))
+#endif // QT_CONFIG(shortcut)
         self.actionFetch.setText(QCoreApplication.translate("MainWindow", u"Fetch Databases", None))
+#if QT_CONFIG(shortcut)
+        self.actionFetch.setShortcut(QCoreApplication.translate("MainWindow", u"F5", None))
+#endif // QT_CONFIG(shortcut)
         self.actionDisconnect.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))
+#if QT_CONFIG(shortcut)
+        self.actionDisconnect.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Shift+D", None))
+#endif // QT_CONFIG(shortcut)
         self.actionDeleteRow.setText(QCoreApplication.translate("MainWindow", u"Delete Row", None))
         self.menuDatabase.setTitle(QCoreApplication.translate("MainWindow", u"Connection", None))
     # retranslateUi

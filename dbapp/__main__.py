@@ -16,12 +16,11 @@ def main():
 
     db_service = DBService()
     crud_service = CrudService(db_service)
-
     window = MainWindow(db_service, crud_service)
+
     window.show()
 
     sys.exit(app.exec())
-
 
 if __name__ == "__main__":
     main()
