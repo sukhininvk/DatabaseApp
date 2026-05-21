@@ -1,20 +1,14 @@
 import sys
 
 from PySide6.QtWidgets import QApplication
-from PySide6.QtGui import QIcon
 
 from dbapp.ui.main_window import MainWindow
 from dbapp.services.database import DBService
 from dbapp.services.crud import CrudService
 from dbapp.services.table import TableService
 
-import dbapp.resources.resources # noqa: F401
-
-
 def main():
     app = QApplication(sys.argv)
-
-    app.setWindowIcon(QIcon(":/icons/icon.png"))
 
     db_service = DBService()
     crud_service = CrudService(db_service)
