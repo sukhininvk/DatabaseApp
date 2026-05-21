@@ -6,8 +6,10 @@ from PySide6.QtGui import QIcon
 from dbapp.ui.main_window import MainWindow
 from dbapp.services.database import DBService
 from dbapp.services.crud import CrudService
+from dbapp.services.table import TableService
 
-from dbapp.resources import resources  # noqa: F401
+import dbapp.resources.resources # noqa: F401
+
 
 def main():
     app = QApplication(sys.argv)
@@ -16,7 +18,8 @@ def main():
 
     db_service = DBService()
     crud_service = CrudService(db_service)
-    window = MainWindow(db_service, crud_service)
+    table_service = TableService(db_service)
+    window = MainWindow(db_service,table_service, crud_service)
 
     window.show()
 

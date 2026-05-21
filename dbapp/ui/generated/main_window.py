@@ -16,10 +16,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QListWidget,
-    QListWidgetItem, QMainWindow, QMenu, QMenuBar,
-    QSizePolicy, QSplitter, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QHBoxLayout, QHeaderView,
+    QListWidget, QListWidgetItem, QMainWindow, QMenu,
+    QMenuBar, QSizePolicy, QSplitter, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -79,6 +79,11 @@ class Ui_MainWindow(object):
         self.tableWidget.setEnabled(False)
         sizePolicy1.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
         self.tableWidget.setSizePolicy(sizePolicy1)
+        self.tableWidget.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
+        self.tableWidget.horizontalHeader().setHighlightSections(False)
+        self.tableWidget.verticalHeader().setVisible(False)
 
         self.rightLayout.addWidget(self.tableWidget)
 

@@ -18,6 +18,9 @@ class ConnectionDialog(QDialog):
         self.ui.connectButton.clicked.connect(self.connect_to_server)
 
     def connect_to_server(self):
+        if not self.ui.databaseLineEdit.text().strip():
+            QMessageBox.warning(self, "Warning", "Database is required")
+            return
         try:
             self.db_service.connect(
                 self.ui.hostnameLineEdit.text(),
@@ -27,6 +30,6 @@ class ConnectionDialog(QDialog):
             )
         except Exception as err:
             QMessageBox.critical(self, "Error", str(err))
-        finally:
+        else:
             self.connected.emit()
             self.close()

@@ -24,17 +24,11 @@ class DBService:
     def is_connected(self):
         return self.connection and self.connection.is_connected()
 
-    def get_tables(self) -> list[str]:
-        cursor = self.sql_execute("SHOW TABLES")
-
-        tables = [table[0] for table in cursor.fetchall()]
-
-        cursor.close()
-
-        return tables
-
     def sql_execute(self, query: str, params=None):
-        cursor = self.connection.cursor()
-        cursor.execute(query, params)
+        if self.is_connected():
+            cursor = self.connection.cursor()
+            cursor.execute(query, params)
 
-        return cursor
+            return cursor
+        else:
+            return None
