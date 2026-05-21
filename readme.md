@@ -21,7 +21,7 @@ The application allows you to connect to a server and browse tables through a gr
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/username/DatabaseApp.git
+git clone https://github.com/sukhininvk/DatabaseApp.git
 cd DatabaseApp
 ```
 
