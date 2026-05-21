@@ -1,7 +1,7 @@
 # DatabaseApp
 
 DatabaseApp is a desktop application written in Python for working with MySQL databases.  
-The application allows you to connect to a server, browse tables through a graphical interface.
+The application allows you to connect to a server and browse tables through a graphical interface.
 
 ## Features
 
