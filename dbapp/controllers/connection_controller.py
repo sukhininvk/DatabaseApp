@@ -1,35 +1,35 @@
 from PySide6.QtWidgets import QMessageBox
+from dbapp.ui.connection_dialog import ConnectionDialog
 
 
 class ConnectionController:
-    def __init__(self, db_service, main_window, connection_dialog):
+    def __init__(self, db_service, main_window):
         self.db_service = db_service
         self.main_window = main_window
-        self.connection_dialog = connection_dialog
 
         self._connect_signals()
 
     def _connect_signals(self):
         self.main_window.ui.actionConnect.triggered.connect(self.open_connection_dialog)
         self.main_window.ui.actionDisconnect.triggered.connect(self.disconnect_from_server)
-        self.connection_dialog.ui.connectButton.clicked.connect(self.connect_to_server)
 
     def open_connection_dialog(self):
-        self.connection_dialog.clear_fields()
-        self.connection_dialog.exec()
+        dialog = ConnectionDialog()
+        dialog.ui.connectButton.clicked.connect(lambda: self.connect_to_server(dialog))
+        dialog.exec()
 
-    def connect_to_server(self):
+    def connect_to_server(self, dialog):
         try:
             self.db_service.connect(
-                self.connection_dialog.ui.hostnameLineEdit.text(),
-                self.connection_dialog.ui.usernameLineEdit.text(),
-                self.connection_dialog.ui.passwordLineEdit.text()
+                dialog.ui.hostnameLineEdit.text(),
+                dialog.ui.usernameLineEdit.text(),
+                dialog.ui.passwordLineEdit.text()
             )
         except Exception as err:
-            QMessageBox.critical(self.connection_dialog, "Error", str(err))
+            QMessageBox.critical(dialog, "Error", str(err))
         else:
             self.update_ui_state()
-            self.connection_dialog.close()
+            dialog.accept()
 
     def update_ui_state(self):
         for widget in self.main_window.connection_required_widgets:

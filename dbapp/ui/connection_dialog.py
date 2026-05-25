@@ -10,8 +10,3 @@ class ConnectionDialog(QDialog):
         self.ui.setupUi(self)
 
         self.ui.cancelButton.clicked.connect(self.reject)
-
-    def clear_fields(self):
-        self.ui.hostnameLineEdit.clear()
-        self.ui.usernameLineEdit.clear()
-        self.ui.passwordLineEdit.clear()

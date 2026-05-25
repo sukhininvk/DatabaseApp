@@ -10,12 +10,10 @@ class AppContainer:
         self.schema_service = SchemaService(self.db_service)
 
         self.main_window = MainWindow()
-        self.connection_dialog = ConnectionDialog()
 
         self.connection_controller = ConnectionController(
             self.db_service,
-            self.main_window,
-            self.connection_dialog
+            self.main_window
         )
 
         self.tree_view_controller = TreeViewController(
