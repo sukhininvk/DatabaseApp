@@ -15,12 +15,13 @@ class AppContainer:
         self.connection_controller = ConnectionController(
             self.db_service,
             self.main_window,
-            self.connection_dialog,
+            self.connection_dialog
         )
 
         self.tree_view_controller = TreeViewController(
             self.schema_service,
             self.main_window,
+            self.db_service
         )
 
         self.table_widget_controller = TableWidgetController(
