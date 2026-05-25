@@ -121,13 +121,14 @@
       <x>270</x>
       <y>154</y>
       <width>117</width>
-      <height>102</height>
+      <height>126</height>
      </rect>
     </property>
     <property name="title">
      <string>Connection</string>
     </property>
     <addaction name="actionConnect"/>
+    <addaction name="actionFetchAll"/>
     <addaction name="actionDisconnect"/>
    </widget>
    <addaction name="menuDatabase"/>
@@ -168,6 +169,17 @@
    </property>
    <property name="text">
     <string>Delete Row</string>
+   </property>
+  </action>
+  <action name="actionFetchAll">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Fetch All</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
    </property>
   </action>
  </widget>

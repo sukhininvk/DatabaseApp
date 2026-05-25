@@ -38,6 +38,9 @@ class Ui_MainWindow(object):
         self.actionDeleteRow = QAction(MainWindow)
         self.actionDeleteRow.setObjectName(u"actionDeleteRow")
         self.actionDeleteRow.setEnabled(False)
+        self.actionFetchAll = QAction(MainWindow)
+        self.actionFetchAll.setObjectName(u"actionFetchAll")
+        self.actionFetchAll.setEnabled(False)
         self.centralWidget = QWidget(MainWindow)
         self.centralWidget.setObjectName(u"centralWidget")
         self.horizontalLayout_2 = QHBoxLayout(self.centralWidget)
@@ -102,11 +105,12 @@ class Ui_MainWindow(object):
         self.menuBar.setGeometry(QRect(0, 0, 1200, 33))
         self.menuDatabase = QMenu(self.menuBar)
         self.menuDatabase.setObjectName(u"menuDatabase")
-        self.menuDatabase.setGeometry(QRect(270, 154, 117, 102))
+        self.menuDatabase.setGeometry(QRect(270, 154, 117, 126))
         MainWindow.setMenuBar(self.menuBar)
 
         self.menuBar.addAction(self.menuDatabase.menuAction())
         self.menuDatabase.addAction(self.actionConnect)
+        self.menuDatabase.addAction(self.actionFetchAll)
         self.menuDatabase.addAction(self.actionDisconnect)
 
         self.retranslateUi(MainWindow)
@@ -129,6 +133,10 @@ class Ui_MainWindow(object):
         self.actionDisconnect.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Shift+D", None))
 #endif // QT_CONFIG(shortcut)
         self.actionDeleteRow.setText(QCoreApplication.translate("MainWindow", u"Delete Row", None))
+        self.actionFetchAll.setText(QCoreApplication.translate("MainWindow", u"Fetch All", None))
+#if QT_CONFIG(shortcut)
+        self.actionFetchAll.setShortcut(QCoreApplication.translate("MainWindow", u"F5", None))
+#endif // QT_CONFIG(shortcut)
         self.menuDatabase.setTitle(QCoreApplication.translate("MainWindow", u"Connection", None))
     # retranslateUi
 

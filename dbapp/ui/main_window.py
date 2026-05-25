@@ -15,6 +15,7 @@ class MainWindow(QMainWindow):
         self.ui.splitter.setStretchFactor(1, 1)
 
         self.connection_required_widgets = [
+            self.ui.actionFetchAll,
             self.ui.actionDisconnect,
             self.ui.treeView,
             self.ui.tableWidget
