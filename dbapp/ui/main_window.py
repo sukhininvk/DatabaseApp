@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QMainWindow, QMessageBox
+from PySide6.QtWidgets import QHeaderView
 from PySide6.QtGui import QCloseEvent
 from dbapp.ui.generated import Ui_MainWindow
 
@@ -15,11 +16,17 @@ class MainWindow(QMainWindow):
         self.ui.splitter.setStretchFactor(1, 1)
 
         self.connection_required_widgets = [
-            self.ui.actionFetchAll,
+            self.ui.actionFetchSchemas,
             self.ui.actionDisconnect,
-            self.ui.treeView,
+            self.ui.treeWidget,
             self.ui.tableWidget
         ]
+
+        header = self.ui.treeWidget.header()
+
+        header.setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
+        header.setSectionsMovable(False)
+        header.setSectionsClickable(False)
 
     def closeEvent(self, event: QCloseEvent):
         reply = QMessageBox.question(

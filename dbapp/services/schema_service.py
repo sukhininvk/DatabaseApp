@@ -2,33 +2,24 @@ class SchemaService:
     def __init__(self, db_service):
         self.db_service = db_service
 
-    def get_tables(self) -> list[str]:
-        if self.db_service.is_connected():
-            cursor = self.db_service.sql_execute("SHOW TABLES")
+    def get_databases(self) -> list[str]:
+        query = "SHOW DATABASES"
+        result = self.db_service.fetch_all(query)
 
-            tables = [row[0] for row in cursor.fetchall()]
-            cursor.close()
+        return [row[0] for row in result]
 
-            return tables
-        else:
-            return []
+    def get_tables(self, database_name: str) -> list[str]:
+        query = f"SHOW TABLES FROM `{database_name}`"
+        result = self.db_service.fetch_all(query)
 
-    def fetch_table(self, table_name: str) -> tuple[list[str], list[tuple]]:
-        allowed_tables = self.db_service.get_tables()
+        return [row[0] for row in result]
 
-        if table_name not in allowed_tables:
-            raise ValueError("Invalid table name")
+    def get_schema(self) -> dict[str, list[str]]:
+        schema = {}
+        databases = self.get_databases()
 
-        query = f"SELECT * FROM `{table_name}` LIMIT 1000"
+        for database in databases:
+            tables = self.get_tables(database)
+            schema[database] = tables
 
-        cursor = self.db_service.sql_execute(query)
-
-        rows = cursor.fetchall()
-        headers = [
-            description[0]
-            for description in cursor.description
-        ]
-
-        cursor.close()
-
-        return headers, rows
+        return schema

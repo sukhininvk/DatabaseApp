@@ -3,14 +3,16 @@ from dbapp.ui.connection_dialog import ConnectionDialog
 
 
 class ConnectionController:
-    def __init__(self, db_service, main_window):
+    def __init__(self, db_service, main_window, schema_controller):
         self.db_service = db_service
         self.main_window = main_window
+        self.schema_controller = schema_controller
 
         self._connect_signals()
 
     def _connect_signals(self):
         self.main_window.ui.actionConnect.triggered.connect(self.open_connection_dialog)
+        self.main_window.ui.actionFetchSchemas.triggered.connect(self.schema_controller.fetch_schemas)
         self.main_window.ui.actionDisconnect.triggered.connect(self.disconnect_from_server)
 
     def open_connection_dialog(self):
@@ -25,6 +27,7 @@ class ConnectionController:
                 dialog.ui.usernameLineEdit.text(),
                 dialog.ui.passwordLineEdit.text()
             )
+            self.schema_controller.fetch_schemas()
         except Exception as err:
             QMessageBox.critical(dialog, "Error", str(err))
         else:
@@ -37,5 +40,5 @@ class ConnectionController:
 
     def disconnect_from_server(self):
         self.db_service.disconnect()
-        self.main_window.ui.tableWidget.clear()
+        self.schema_controller.clear_tree_widget()
         self.update_ui_state()

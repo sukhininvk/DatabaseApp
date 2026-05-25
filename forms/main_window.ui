@@ -44,7 +44,7 @@
       <widget class="QWidget" name="verticalLayoutWidget">
        <layout class="QVBoxLayout" name="leftLayout">
         <item>
-         <widget class="QTreeView" name="treeView">
+         <widget class="QTreeWidget" name="treeWidget">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -60,6 +60,23 @@
           <property name="horizontalScrollMode">
            <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
           </property>
+          <property name="uniformRowHeights">
+           <bool>false</bool>
+          </property>
+          <property name="columnCount">
+           <number>1</number>
+          </property>
+          <attribute name="headerVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="headerStretchLastSection">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string notr="true">1</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>
@@ -119,7 +136,7 @@
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>154</y>
+      <y>156</y>
       <width>117</width>
       <height>126</height>
      </rect>
@@ -128,7 +145,7 @@
      <string>Connection</string>
     </property>
     <addaction name="actionConnect"/>
-    <addaction name="actionFetchAll"/>
+    <addaction name="actionFetchSchemas"/>
     <addaction name="actionDisconnect"/>
    </widget>
    <addaction name="menuDatabase"/>
@@ -171,12 +188,12 @@
     <string>Delete Row</string>
    </property>
   </action>
-  <action name="actionFetchAll">
+  <action name="actionFetchSchemas">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Fetch All</string>
+    <string>Fetch Schemas</string>
    </property>
    <property name="shortcut">
     <string>F5</string>

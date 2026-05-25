@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'main_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.11.0
+## Created by: Qt User Interface Compiler version 6.11.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -18,8 +18,8 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QHBoxLayout, QHeaderView,
     QMainWindow, QMenu, QMenuBar, QSizePolicy,
-    QSplitter, QTableWidget, QTableWidgetItem, QTreeView,
-    QVBoxLayout, QWidget)
+    QSplitter, QTableWidget, QTableWidgetItem, QTreeWidget,
+    QTreeWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -38,9 +38,9 @@ class Ui_MainWindow(object):
         self.actionDeleteRow = QAction(MainWindow)
         self.actionDeleteRow.setObjectName(u"actionDeleteRow")
         self.actionDeleteRow.setEnabled(False)
-        self.actionFetchAll = QAction(MainWindow)
-        self.actionFetchAll.setObjectName(u"actionFetchAll")
-        self.actionFetchAll.setEnabled(False)
+        self.actionFetchSchemas = QAction(MainWindow)
+        self.actionFetchSchemas.setObjectName(u"actionFetchSchemas")
+        self.actionFetchSchemas.setEnabled(False)
         self.centralWidget = QWidget(MainWindow)
         self.centralWidget.setObjectName(u"centralWidget")
         self.horizontalLayout_2 = QHBoxLayout(self.centralWidget)
@@ -61,18 +61,25 @@ class Ui_MainWindow(object):
         self.leftLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.leftLayout.setObjectName(u"leftLayout")
         self.leftLayout.setContentsMargins(0, 0, 0, 0)
-        self.treeView = QTreeView(self.verticalLayoutWidget)
-        self.treeView.setObjectName(u"treeView")
-        self.treeView.setEnabled(False)
+        self.treeWidget = QTreeWidget(self.verticalLayoutWidget)
+        __qtreewidgetitem = QTreeWidgetItem()
+        __qtreewidgetitem.setText(0, u"1")
+        self.treeWidget.setHeaderItem(__qtreewidgetitem)
+        self.treeWidget.setObjectName(u"treeWidget")
+        self.treeWidget.setEnabled(False)
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.treeView.sizePolicy().hasHeightForWidth())
-        self.treeView.setSizePolicy(sizePolicy1)
-        self.treeView.setVerticalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
-        self.treeView.setHorizontalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        sizePolicy1.setHeightForWidth(self.treeWidget.sizePolicy().hasHeightForWidth())
+        self.treeWidget.setSizePolicy(sizePolicy1)
+        self.treeWidget.setVerticalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.treeWidget.setHorizontalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.treeWidget.setUniformRowHeights(False)
+        self.treeWidget.setColumnCount(1)
+        self.treeWidget.header().setVisible(False)
+        self.treeWidget.header().setStretchLastSection(False)
 
-        self.leftLayout.addWidget(self.treeView)
+        self.leftLayout.addWidget(self.treeWidget)
 
         self.splitter.addWidget(self.verticalLayoutWidget)
         self.verticalLayoutWidget_2 = QWidget(self.splitter)
@@ -105,12 +112,12 @@ class Ui_MainWindow(object):
         self.menuBar.setGeometry(QRect(0, 0, 1200, 33))
         self.menuDatabase = QMenu(self.menuBar)
         self.menuDatabase.setObjectName(u"menuDatabase")
-        self.menuDatabase.setGeometry(QRect(270, 154, 117, 126))
+        self.menuDatabase.setGeometry(QRect(270, 156, 117, 126))
         MainWindow.setMenuBar(self.menuBar)
 
         self.menuBar.addAction(self.menuDatabase.menuAction())
         self.menuDatabase.addAction(self.actionConnect)
-        self.menuDatabase.addAction(self.actionFetchAll)
+        self.menuDatabase.addAction(self.actionFetchSchemas)
         self.menuDatabase.addAction(self.actionDisconnect)
 
         self.retranslateUi(MainWindow)
@@ -133,9 +140,9 @@ class Ui_MainWindow(object):
         self.actionDisconnect.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Shift+D", None))
 #endif // QT_CONFIG(shortcut)
         self.actionDeleteRow.setText(QCoreApplication.translate("MainWindow", u"Delete Row", None))
-        self.actionFetchAll.setText(QCoreApplication.translate("MainWindow", u"Fetch All", None))
+        self.actionFetchSchemas.setText(QCoreApplication.translate("MainWindow", u"Fetch Schemas", None))
 #if QT_CONFIG(shortcut)
-        self.actionFetchAll.setShortcut(QCoreApplication.translate("MainWindow", u"F5", None))
+        self.actionFetchSchemas.setShortcut(QCoreApplication.translate("MainWindow", u"F5", None))
 #endif // QT_CONFIG(shortcut)
         self.menuDatabase.setTitle(QCoreApplication.translate("MainWindow", u"Connection", None))
     # retranslateUi

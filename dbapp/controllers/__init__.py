@@ -1,3 +1,3 @@
 from .connection_controller import ConnectionController
-from .tree_view_controller import TreeViewController
+from .schema_controller import SchemaController
 from .table_widget_controller import TableWidgetController
