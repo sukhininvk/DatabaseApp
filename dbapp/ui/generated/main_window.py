@@ -17,15 +17,16 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QHBoxLayout, QHeaderView,
-    QListWidget, QListWidgetItem, QMainWindow, QMenu,
-    QMenuBar, QSizePolicy, QSplitter, QTableWidget,
-    QTableWidgetItem, QVBoxLayout, QWidget)
+    QMainWindow, QMenu, QMenuBar, QSizePolicy,
+    QSplitter, QTableWidget, QTableWidgetItem, QTreeView,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(1200, 900)
+        MainWindow.setMinimumSize(QSize(0, 0))
         self.actionConnect = QAction(MainWindow)
         self.actionConnect.setObjectName(u"actionConnect")
         self.actionFetch = QAction(MainWindow)
@@ -57,16 +58,18 @@ class Ui_MainWindow(object):
         self.leftLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.leftLayout.setObjectName(u"leftLayout")
         self.leftLayout.setContentsMargins(0, 0, 0, 0)
-        self.listWidget = QListWidget(self.verticalLayoutWidget)
-        self.listWidget.setObjectName(u"listWidget")
-        self.listWidget.setEnabled(False)
+        self.treeView = QTreeView(self.verticalLayoutWidget)
+        self.treeView.setObjectName(u"treeView")
+        self.treeView.setEnabled(False)
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.listWidget.sizePolicy().hasHeightForWidth())
-        self.listWidget.setSizePolicy(sizePolicy1)
+        sizePolicy1.setHeightForWidth(self.treeView.sizePolicy().hasHeightForWidth())
+        self.treeView.setSizePolicy(sizePolicy1)
+        self.treeView.setVerticalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.treeView.setHorizontalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
 
-        self.leftLayout.addWidget(self.listWidget)
+        self.leftLayout.addWidget(self.treeView)
 
         self.splitter.addWidget(self.verticalLayoutWidget)
         self.verticalLayoutWidget_2 = QWidget(self.splitter)
@@ -80,7 +83,9 @@ class Ui_MainWindow(object):
         sizePolicy1.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
         self.tableWidget.setSizePolicy(sizePolicy1)
         self.tableWidget.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
-        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectItems)
+        self.tableWidget.setVerticalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.tableWidget.setHorizontalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
         self.tableWidget.horizontalHeader().setHighlightSections(False)
         self.tableWidget.verticalHeader().setVisible(False)
@@ -94,7 +99,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralWidget)
         self.menuBar = QMenuBar(MainWindow)
         self.menuBar.setObjectName(u"menuBar")
-        self.menuBar.setGeometry(QRect(0, 0, 800, 33))
+        self.menuBar.setGeometry(QRect(0, 0, 1200, 33))
         self.menuDatabase = QMenu(self.menuBar)
         self.menuDatabase.setObjectName(u"menuDatabase")
         self.menuDatabase.setGeometry(QRect(270, 154, 117, 102))

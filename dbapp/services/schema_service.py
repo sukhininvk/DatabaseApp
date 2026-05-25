@@ -1,4 +1,4 @@
-class TableService:
+class SchemaService:
     def __init__(self, db_service):
         self.db_service = db_service
 
@@ -14,6 +14,11 @@ class TableService:
             return []
 
     def fetch_table(self, table_name: str) -> tuple[list[str], list[tuple]]:
+        allowed_tables = self.db_service.get_tables()
+
+        if table_name not in allowed_tables:
+            raise ValueError("Invalid table name")
+
         query = f"SELECT * FROM `{table_name}` LIMIT 1000"
 
         cursor = self.db_service.sql_execute(query)

@@ -1,21 +1,16 @@
 import sys
-
 from PySide6.QtWidgets import QApplication
-
-from dbapp.ui.main_window import MainWindow
-from dbapp.services.database import DBService
-from dbapp.services.crud import CrudService
-from dbapp.services.table import TableService
+from PySide6.QtGui import QIcon
+from dbapp.core import AppContainer
+from dbapp.resources import resources # noqa: F401
 
 def main():
     app = QApplication(sys.argv)
 
-    db_service = DBService()
-    crud_service = CrudService(db_service)
-    table_service = TableService(db_service)
-    window = MainWindow(db_service,table_service, crud_service)
+    app.setWindowIcon(QIcon(":/icons/app_icon.png"))
 
-    window.show()
+    container = AppContainer()
+    container.main_window.show()
 
     sys.exit(app.exec())
 

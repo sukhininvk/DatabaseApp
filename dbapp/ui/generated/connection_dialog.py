@@ -23,34 +23,25 @@ class Ui_ConnectionDialog(object):
     def setupUi(self, ConnectionDialog):
         if not ConnectionDialog.objectName():
             ConnectionDialog.setObjectName(u"ConnectionDialog")
-        ConnectionDialog.resize(350, 176)
+        ConnectionDialog.resize(350, 144)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(ConnectionDialog.sizePolicy().hasHeightForWidth())
         ConnectionDialog.setSizePolicy(sizePolicy)
-        ConnectionDialog.setMinimumSize(QSize(350, 176))
-        ConnectionDialog.setMaximumSize(QSize(350, 176))
+        ConnectionDialog.setMinimumSize(QSize(350, 144))
+        ConnectionDialog.setMaximumSize(QSize(350, 144))
         ConnectionDialog.setModal(True)
         self.verticalLayout = QVBoxLayout(ConnectionDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.upperLayout = QGridLayout()
         self.upperLayout.setObjectName(u"upperLayout")
-        self.passwordLabel = QLabel(ConnectionDialog)
-        self.passwordLabel.setObjectName(u"passwordLabel")
-        self.passwordLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.passwordLineEdit = QLineEdit(ConnectionDialog)
+        self.passwordLineEdit.setObjectName(u"passwordLineEdit")
+        self.passwordLineEdit.setEchoMode(QLineEdit.EchoMode.Password)
+        self.passwordLineEdit.setClearButtonEnabled(False)
 
-        self.upperLayout.addWidget(self.passwordLabel, 2, 0, 1, 1)
-
-        self.usernameLineEdit = QLineEdit(ConnectionDialog)
-        self.usernameLineEdit.setObjectName(u"usernameLineEdit")
-
-        self.upperLayout.addWidget(self.usernameLineEdit, 1, 1, 1, 1)
-
-        self.hostnameLineEdit = QLineEdit(ConnectionDialog)
-        self.hostnameLineEdit.setObjectName(u"hostnameLineEdit")
-
-        self.upperLayout.addWidget(self.hostnameLineEdit, 0, 1, 1, 1)
+        self.upperLayout.addWidget(self.passwordLineEdit, 2, 1, 1, 1)
 
         self.hostnameLabel = QLabel(ConnectionDialog)
         self.hostnameLabel.setObjectName(u"hostnameLabel")
@@ -59,29 +50,27 @@ class Ui_ConnectionDialog(object):
 
         self.upperLayout.addWidget(self.hostnameLabel, 0, 0, 1, 1)
 
-        self.passwordLineEdit = QLineEdit(ConnectionDialog)
-        self.passwordLineEdit.setObjectName(u"passwordLineEdit")
-        self.passwordLineEdit.setEchoMode(QLineEdit.EchoMode.Password)
-        self.passwordLineEdit.setClearButtonEnabled(False)
-
-        self.upperLayout.addWidget(self.passwordLineEdit, 2, 1, 1, 1)
-
         self.usernameLabel = QLabel(ConnectionDialog)
         self.usernameLabel.setObjectName(u"usernameLabel")
         self.usernameLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
         self.upperLayout.addWidget(self.usernameLabel, 1, 0, 1, 1)
 
-        self.databaseLineEdit = QLineEdit(ConnectionDialog)
-        self.databaseLineEdit.setObjectName(u"databaseLineEdit")
+        self.usernameLineEdit = QLineEdit(ConnectionDialog)
+        self.usernameLineEdit.setObjectName(u"usernameLineEdit")
 
-        self.upperLayout.addWidget(self.databaseLineEdit, 3, 1, 1, 1)
+        self.upperLayout.addWidget(self.usernameLineEdit, 1, 1, 1, 1)
 
-        self.databaseLabel = QLabel(ConnectionDialog)
-        self.databaseLabel.setObjectName(u"databaseLabel")
-        self.databaseLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+        self.passwordLabel = QLabel(ConnectionDialog)
+        self.passwordLabel.setObjectName(u"passwordLabel")
+        self.passwordLabel.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
-        self.upperLayout.addWidget(self.databaseLabel, 3, 0, 1, 1)
+        self.upperLayout.addWidget(self.passwordLabel, 2, 0, 1, 1)
+
+        self.hostnameLineEdit = QLineEdit(ConnectionDialog)
+        self.hostnameLineEdit.setObjectName(u"hostnameLineEdit")
+
+        self.upperLayout.addWidget(self.hostnameLineEdit, 0, 1, 1, 1)
 
 
         self.verticalLayout.addLayout(self.upperLayout)
@@ -114,12 +103,11 @@ class Ui_ConnectionDialog(object):
 
     def retranslateUi(self, ConnectionDialog):
         ConnectionDialog.setWindowTitle(QCoreApplication.translate("ConnectionDialog", u"Connect to MySQL Server", None))
+        self.hostnameLabel.setText(QCoreApplication.translate("ConnectionDialog", u"Hostname:", None))
+        self.usernameLabel.setText(QCoreApplication.translate("ConnectionDialog", u"Username:", None))
         self.passwordLabel.setText(QCoreApplication.translate("ConnectionDialog", u"Password:", None))
         self.hostnameLineEdit.setInputMask("")
         self.hostnameLineEdit.setPlaceholderText("")
-        self.hostnameLabel.setText(QCoreApplication.translate("ConnectionDialog", u"Hostname:", None))
-        self.usernameLabel.setText(QCoreApplication.translate("ConnectionDialog", u"Username:", None))
-        self.databaseLabel.setText(QCoreApplication.translate("ConnectionDialog", u"Database:", None))
         self.connectButton.setText(QCoreApplication.translate("ConnectionDialog", u"OK", None))
         self.cancelButton.setText(QCoreApplication.translate("ConnectionDialog", u"Cancel", None))
     # retranslateUi

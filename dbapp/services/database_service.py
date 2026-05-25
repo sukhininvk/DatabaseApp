@@ -1,18 +1,18 @@
 import mysql.connector
 
+
 class DBService:
     def __init__(self):
         self.connection = None
 
-    def connect(self, host: str, user: str, password: str, database: str):
+    def connect(self, host: str, user: str, password: str):
         if self.is_connected():
             self.disconnect()
 
         self.connection = mysql.connector.connect(
             host=host,
             user=user,
-            password=password,
-            database=database
+            password=password
         )
 
     def disconnect(self):
@@ -21,8 +21,8 @@ class DBService:
 
         self.connection = None
 
-    def is_connected(self):
-        return self.connection and self.connection.is_connected()
+    def is_connected(self) -> bool:
+        return self.connection is not None
 
     def sql_execute(self, query: str, params=None):
         if self.is_connected():
